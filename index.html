@@ -39,14 +39,24 @@
         }
 
         .logo {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-            filter: invert(1);
+            display: none;
+        }
+
+        .brand-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #00d4ff, #ffffff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
         }
 
         .app-title {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -273,15 +283,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <svg class="logo" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                <text x="20" y="80" fill="white" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" style="font-style: italic;">Truth</text>
-                <line x1="20" y1="90" x2="320" y2="90" stroke="white" stroke-width="4"/>
-                <text x="20" y="140" fill="white" font-family="Arial Black, Arial, sans-serif" font-size="40" font-weight="900" letter-spacing="8px">CHARTING</text>
-                <circle cx="340" cy="100" r="45" fill="none" stroke="white" stroke-width="2"/>
-                <path d="M310 85 Q340 70 370 85 Q355 100 370 115 Q340 130 310 115 Q325 100 310 85" fill="none" stroke="white" stroke-width="1.5"/>
-                <path d="M320 75 Q340 65 360 75 M320 125 Q340 135 360 125 M300 100 L380 100" stroke="white" stroke-width="1"/>
-            </svg>
-            <h1 class="app-title">Invoice Generator</h1>
+            <h1 class="brand-title">TRUTH CHARTING</h1>
+            <h2 class="app-title">Invoice Generator</h2>
             <p class="subtitle">Professional Invoice Creation</p>
         </div>
 
@@ -291,26 +294,27 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="businessName">Business Name</label>
-                        <input type="text" id="businessName" placeholder="Truth Charting" value="Truth Charting">
+                        <input type="text" id="businessName" placeholder="Truth Charting" value="John Donahue">
                     </div>
                     <div class="form-group">
                         <label for="businessEmail">Email</label>
-                        <input type="email" id="businessEmail" placeholder="contact@truthcharting.com">
+                        <input type="email" id="businessEmail" placeholder="contact@truthcharting.com" value="john@truthcharting.com">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="businessPhone">Phone</label>
-                        <input type="tel" id="businessPhone" placeholder="(555) 123-4567">
+                        <input type="tel" id="businessPhone" placeholder="(555) 123-4567" value="352-223-2895">
                     </div>
                     <div class="form-group">
                         <label for="businessWebsite">Website</label>
-                        <input type="url" id="businessWebsite" placeholder="www.truthcharting.com">
+                        <input type="url" id="businessWebsite" placeholder="www.truthcharting.com" value="www.truthcharting.com">
                     </div>
                 </div>
                 <div class="form-group full-width">
                     <label for="businessAddress">Business Address</label>
-                    <textarea id="businessAddress" rows="3" placeholder="123 Business Ave&#10;City, State 12345&#10;Country"></textarea>
+                    <textarea id="businessAddress" rows="3" placeholder="123 Business Ave&#10;City, State 12345&#10;Country">13324 Citrus Grove Road
+Clermont, FL, 34715</textarea>
                 </div>
             </div>
 
@@ -319,11 +323,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="clientName">Client Name</label>
-                        <input type="text" id="clientName" placeholder="Client Company Name">
+                        <input type="text" id="clientName" placeholder="Client Company Name" value="Hallow Inc.">
                     </div>
                     <div class="form-group">
                         <label for="clientEmail">Client Email</label>
-                        <input type="email" id="clientEmail" placeholder="client@company.com">
+                        <input type="email" id="clientEmail" placeholder="client@company.com" value="ap@hallow.app">
                     </div>
                 </div>
                 <div class="form-group full-width">
@@ -351,7 +355,7 @@
                     </div>
                     <div class="form-group">
                         <label for="paymentTerms">Payment Terms</label>
-                        <input type="text" id="paymentTerms" placeholder="Net 30">
+                        <input type="text" id="paymentTerms" placeholder="Net 30" value="Net 30">
                     </div>
                 </div>
             </div>
@@ -362,7 +366,7 @@
                     <div class="service-item">
                         <div class="form-group service-description">
                             <label>Description</label>
-                            <input type="text" class="service-desc" placeholder="Service or product description">
+                            <input type="text" class="service-desc" placeholder="Service or product description" value="">
                         </div>
                         <div class="form-group service-quantity">
                             <label>Quantity</label>
@@ -370,7 +374,7 @@
                         </div>
                         <div class="form-group service-rate">
                             <label>Rate ($)</label>
-                            <input type="number" class="service-rate-input" placeholder="0.00" min="0" step="0.01">
+                            <input type="number" class="service-rate-input" placeholder="0.00" min="0" step="0.01" value="7000">
                         </div>
                         <div class="service-total">
                             $0.00
@@ -391,6 +395,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
     <script>
         // Set current date as default
         document.getElementById('invoiceDate').valueAsDate = new Date();
@@ -401,7 +406,16 @@
         document.getElementById('dueDate').valueAsDate = dueDate;
         
         // Generate invoice number
-        document.getElementById('invoiceNumber').value = 'INV-' + new Date().getFullYear() + String(new Date().getMonth() + 1).padStart(2, '0') + String(new Date().getDate()).padStart(2, '0') + '-001';
+        document.getElementById('invoiceNumber').value = 'HA0001Q';
+        
+        // Set default service description with current month
+        const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+        document.querySelector('.service-desc').value = `${currentMonth} Social Media Marketing`;
+        
+        // Calculate initial total
+        setTimeout(() => {
+            calculateTotal();
+        }, 100);
 
         function addService() {
             const container = document.getElementById('servicesContainer');
@@ -468,8 +482,17 @@
         });
 
         function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            console.log('Generate PDF clicked');
+            
+            // Check if jsPDF is loaded
+            if (typeof window.jspdf === 'undefined') {
+                alert('PDF library is still loading. Please wait a moment and try again.');
+                return;
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
             
             // Get form data
             const businessName = document.getElementById('businessName').value;
@@ -492,73 +515,65 @@
             // Set colors and fonts
             doc.setFont('helvetica', 'bold');
             
-            // Header with logo text
-            doc.setFontSize(28);
+            // Header with company name
+            doc.setFontSize(24);
             doc.setTextColor(0, 0, 0);
-            doc.text('Truth', 20, 30);
-            doc.setFontSize(16);
-            doc.text('CHARTING', 20, 40);
-            
-            // Draw globe icon
-            doc.circle(170, 30, 15);
-            doc.line(160, 30, 180, 30);
-            doc.line(170, 18, 170, 42);
-            doc.arc(170, 30, 10, 0, Math.PI);
-            doc.arc(170, 30, 10, Math.PI, 2 * Math.PI);
+            doc.setFont('helvetica', 'bold');
+            doc.text('TRUTH CHARTING', 20, 30);
             
             // Invoice title
             doc.setFontSize(32);
             doc.setTextColor(0, 0, 0);
-            doc.text('INVOICE', 20, 70);
+            doc.text('INVOICE', 20, 50);
             
             // Business info
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
-            doc.text(businessName, 20, 85);
-            if (businessEmail) doc.text(businessEmail, 20, 92);
-            if (businessPhone) doc.text(businessPhone, 20, 99);
-            if (businessWebsite) doc.text(businessWebsite, 20, 106);
+            doc.text(businessName, 20, 65);
+            if (businessEmail) doc.text(businessEmail, 20, 72);
+            if (businessPhone) doc.text(businessPhone, 20, 79);
+            if (businessWebsite) doc.text(businessWebsite, 20, 86);
             if (businessAddress) {
                 const addressLines = businessAddress.split('\n');
                 addressLines.forEach((line, index) => {
-                    doc.text(line, 20, 113 + (index * 7));
+                    doc.text(line, 20, 93 + (index * 7));
                 });
             }
             
             // Invoice details box
             doc.setFillColor(240, 240, 240);
-            doc.rect(120, 80, 70, 35, 'F');
+            doc.rect(120, 60, 70, 35, 'F');
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(9);
-            doc.text('Invoice #:', 125, 90);
-            doc.text('Date:', 125, 97);
-            doc.text('Due Date:', 125, 104);
-            doc.text('Terms:', 125, 111);
+            doc.text('Invoice #:', 125, 70);
+            doc.text('Date:', 125, 77);
+            doc.text('Due Date:', 125, 84);
+            doc.text('Terms:', 125, 91);
             
             doc.setFont('helvetica', 'normal');
-            doc.text(invoiceNumber, 145, 90);
-            doc.text(invoiceDate, 145, 97);
-            doc.text(dueDate, 145, 104);
-            doc.text(paymentTerms, 145, 111);
+            doc.text(invoiceNumber, 145, 70);
+            doc.text(invoiceDate, 145, 77);
+            doc.text(dueDate, 145, 84);
+            doc.text(paymentTerms, 145, 91);
             
             // Bill to section
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(12);
-            doc.text('BILL TO:', 20, 140);
+            doc.text('BILL TO:', 20, 120);
             
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(10);
-            doc.text(clientName, 20, 150);
-            if (clientEmail) doc.text(clientEmail, 20, 157);
+            doc.text(clientName, 20, 130);
+            if (clientEmail) doc.text(clientEmail, 20, 137);
             if (clientAddress) {
                 const clientAddressLines = clientAddress.split('\n');
                 clientAddressLines.forEach((line, index) => {
-                    doc.text(line, 20, 164 + (index * 7));
+                    doc.text(line, 20, 144 + (index * 7));
                 });
             }
             
             // Services table
-            let yPosition = 190;
+            let yPosition = 170;
             
             // Table header
             doc.setFillColor(50, 50, 50);
@@ -609,6 +624,11 @@
             
             // Save the PDF
             doc.save(`Invoice-${invoiceNumber}.pdf`);
+            
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('There was an error generating the PDF. Please check the console for details.');
+            }
         }
 
         // Register service worker for PWA
